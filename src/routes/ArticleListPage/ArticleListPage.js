@@ -10,22 +10,31 @@ export default class ArticleListPage extends Component {
   componentDidMount() {
     this.context.clearError()
     ArticleApiService.getArticles()
-      .then(this.context.setArticleList)
+      .then(this.context.setArticleList
+    )
       .catch(this.context.setError)
   }
 
   renderArticles() {
     const { articleList = [] } = this.context
-    return articleList.map(article =>
-      <ArticleListItem
-        key={article.id}
-        article={article}
-      />
-    )
+    console.log('articleList', articleList)
+
+    if(articleList.length > 0){
+
+      return articleList.map(article =>
+        <ArticleListItem
+          key={article.id}
+          article={article}
+        />
+      )
+    }
   }
 
   render() {
     const { error } = this.context
+
+    console.log('this.context', this.context)
+
     return (
       <Section list className='ArticleListPage'>
         {error

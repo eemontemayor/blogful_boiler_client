@@ -7,7 +7,12 @@ import './ArticleListItem.css'
 
 export default class ArticleListItem extends Component {
   render() {
+
+
     const { article } = this.props
+
+    console.log('article', article)
+
     return (
       <Link to={`/article/${article.id}`} className='ArticleListItem'>
         <header className='ArticleListItem__header'>
@@ -18,11 +23,11 @@ export default class ArticleListItem extends Component {
         </header>
         <footer className='ArticleListItem__footer'>
           <ArticleStyle article={article} />
-          {article.author.id && <>
+          {/* {article.author.id && <>
             <Hyph />
             <ArticleAuthor article={article} />
-          </>}
-          <ArticleCommentCount article={article} />
+          </>} */}
+          {/* <ArticleCommentCount article={article} /> */}
         </footer>
       </Link>
     )

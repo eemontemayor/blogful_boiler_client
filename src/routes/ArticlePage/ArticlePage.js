@@ -20,9 +20,9 @@ export default class ArticlePage extends Component {
     ArticleApiService.getArticle(articleId)
       .then(this.context.setArticle)
       .catch(this.context.setError)
-    ArticleApiService.getArticleComments(articleId)
-      .then(this.context.setComments)
-      .catch(this.context.setError)
+    // ArticleApiService.getArticleComments(articleId)
+    //   .then(this.context.setComments)
+    //   .catch(this.context.setError)
   }
 
   componentWillUnmount() {
@@ -35,15 +35,15 @@ export default class ArticlePage extends Component {
       <h2>{article.title}</h2>
       <p>
         <ArticleStyle article={article} />
-        {article.author.id && <>
+        {/* {article.author.id && <>
           <Hyph />
           <ArticleAuthor article={article} />
-        </>}
+        </>} */}
         <Hyph />
         <NiceDate date={article.date_created} />
       </p>
       <ArticleContent article={article} />
-      <ArticleComments comments={comments} />
+      {/* <ArticleComments comments={comments} /> */}
       <CommentForm />
     </>
   }
@@ -81,7 +81,8 @@ function ArticleStyle({ article }) {
 function ArticleAuthor({ article = nullArticle }) {
   return (
     <span className='ArticlePage__author'>
-      {article.author.full_name}
+      {/* {article.author.full_name} */}
+      ///
     </span>
   )
 }
@@ -95,8 +96,10 @@ function ArticleContent({ article }) {
 }
 
 function ArticleComments({ comments = [] }) {
-  return (
-    <ul className='ArticlePage__comment-list'>
+  if(comments.length > 0){
+
+    return (
+      <ul className='ArticlePage__comment-list'>
       {comments.map(comment =>
         <li key={comment.id} className='ArticlePage__comment'>
           <p className='ArticlePage__comment-text'>
@@ -104,7 +107,7 @@ function ArticleComments({ comments = [] }) {
               size='lg'
               icon='quote-left'
               className='ArticlePage__comment-icon blue'
-            />
+              />
             {comment.text}
           </p>
           <p className='ArticlePage__comment-user'>
@@ -114,4 +117,5 @@ function ArticleComments({ comments = [] }) {
       )}
     </ul>
   )
+}
 }
